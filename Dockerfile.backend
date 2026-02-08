@@ -1,0 +1,28 @@
+FROM python:3.13-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+# System deps (for Postgres client tools and pandas build dependencies)
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        postgresql-client \
+        gcc \
+        g++ \
+        make \
+        libc6-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY backend/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+COPY backend /app
+
+ENV DJANGO_SETTINGS_MODULE=tenderlink.settings
+
+RUN chmod +x /app/entrypoint.sh
+CMD ["/app/entrypoint.sh"]
+
+
