@@ -29,7 +29,7 @@ Finding and tracking government tenders in South Africa is fragmented across mul
 ![Admin Dashboard](docs/screenshots/admin.png)
 *Admin panel for managing ingestion, suppliers, and system monitoring*
 
-> **Note:** Screenshots should be added to `docs/screenshots/` directory
+
 
 ## Key Features
 
